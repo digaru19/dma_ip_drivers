@@ -1973,12 +1973,10 @@ static struct eth_dev_ops qdma_eth_dev_ops = {
 void qdma_dev_ops_init(struct rte_eth_dev *dev)
 {
 	dev->dev_ops = &qdma_eth_dev_ops;
-	if (rte_eal_process_type() == RTE_PROC_PRIMARY) {
-		qdma_set_rx_function(dev);
-		qdma_set_tx_function(dev);
-		dev->rx_queue_count = &qdma_dev_rx_queue_count;
-		dev->rx_descriptor_status = &qdma_dev_rx_descriptor_status;
-		dev->tx_descriptor_status = &qdma_dev_tx_descriptor_status;
-	}
+	qdma_set_rx_function(dev);
+	qdma_set_tx_function(dev);
+	dev->rx_queue_count = &qdma_dev_rx_queue_count;
+	dev->rx_descriptor_status = &qdma_dev_rx_descriptor_status;
+	dev->tx_descriptor_status = &qdma_dev_tx_descriptor_status;
 }
 
